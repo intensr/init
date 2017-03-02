@@ -1,0 +1,31 @@
+// @BASE -> ELEMENTS -> ROOT
+
+
+// Structure from:
+// https://developer.mozilla.org/de/docs/Web/HTML/HTML5/HTML5_element_list
+//
+//  1. Reset scrolling bar behaviour on every (especially desktop) device
+//  2. Apply base settings variable (@BASE -> SETTINGS)
+//  3. Unitless
+//  4. Fonts on OSX will look more consistent with other systems that do not
+//     render text using sub-pixel anti-aliasing. Opinion: sub pixel looks shit.
+//     http://maxvoltar.com/sandbox/fontsmoothing/
+//  5. Apply element settings
+
+
+// Element settings
+$element-html-background: $base-color-background !default;
+
+
+// Html element
+html {
+  overflow-y: scroll; // 1
+  color: $base-color-text; // 2
+  background: $element-html-background; // 5, 2
+  font-family: $base-font-family; // 2
+  font-size: strip-unit($base-font-size) / 16 * 1em; // 2
+  line-height: strip-unit($base-line-height-ratio); // 2, 3
+  -moz-osx-font-smoothing: grayscale; // 4
+  -webkit-font-smoothing: antialiased; // 4
+  @extend %html !optional;
+}

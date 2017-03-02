@@ -1,0 +1,16 @@
+// @BASE -> PLACEHOLDERS -> VERTICAL RHYTHM PADDING
+
+
+// Applies the same padding to most of the regular form elements such as buttons,
+// inputs, etc. The reason behind that is the vertical rhythm. This should be
+// imported with the element bottom margin (@BASE -> PLACEHOLDERS -> VERTICAL RHYTHM MARGIN)
+// for best results.
+
+
+%button {
+  padding:
+    to-rem($base-spacing-quarter - $element-button-border-width)
+    to-rem($base-spacing-half)
+    to-rem(ceil($base-spacing / 4) - $element-button-border-width)
+    to-rem($base-spacing-half);
+}

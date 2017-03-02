@@ -1,0 +1,8 @@
+// @BASE -> PLACEHOLDER -> RESET ELEMENT UNDERLINES
+
+
+// Remove underlines from potentially troublesome elements.
+%u,
+%ins {
+  text-decoration: none;
+}

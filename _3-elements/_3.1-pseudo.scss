@@ -1,0 +1,41 @@
+// @BASE -> ELEMENTS -> PSEUDO
+
+
+// Structure from:
+// https://developer.mozilla.org/de/docs/Web/HTML/HTML5/HTML5_element_list
+//
+//  1. Apply base settings variable (@BASE -> SETTINGS)
+//  2. Apply element settings
+//  3. Opinion: Improves readability
+//
+
+
+// Element settings
+$element-selection-color: $base-color-selection !default;
+$element-selection-background: $base-color-selection-background !default;
+
+// Star selector
+* {
+  @extend %star-selector !optional;
+}
+
+// Global selection
+::selection {
+  color: $element-selection-color; // 1, 2
+  background: $element-selection-background; // 1, 2
+  text-shadow: none; // 3
+}
+
+// Suppress the focus outline on links that cannot be accessed via a keyboard.
+// This prevents an unwanted focus outline from appearing around elements that
+// might still respond to pointer events.
+//
+// N.B. it is okay to use `!important` here as we're doing it preemptively
+// i.e. you know you will always want the rule it's applied too to take
+// precedence.
+//
+// @credit
+// https://github.com/suitcss/
+[tabindex="-1"]:focus {
+  outline: none !important;
+}

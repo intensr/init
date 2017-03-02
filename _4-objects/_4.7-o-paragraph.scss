@@ -1,0 +1,12 @@
+// @OBJECTS -> PARAGRAPH
+
+
+// This object basically exists for double stranding and as basis for component
+// headlines. These classes can be extended but should never be repeated in
+// declaration anywhere in your scss files.
+
+
+.o-p {
+  @extend %p !optional;
+  @extend %o-p !optional;
+}

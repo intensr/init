@@ -1,0 +1,57 @@
+// @CORE -> UTILITIES -> SHOW
+
+
+// The show object is the opposite to the show object.
+// Instead of hiding the element at a specific range, it shows the element at a
+// specific range and hides it at all other ranges.
+// It is embedded before the hide element so that the hide object will always
+// override the show object, if needed
+
+
+.#{$base-prefix}o-show\@desktop {
+  @include breakpoint(mobile, laptop) {
+    display: none;
+    visibility: hidden;
+  }
+}
+
+.#{$base-prefix}o-show\@laptop {
+  @include breakpoint(mobile, tablet-fluid) {
+    display: none;
+    visibility: hidden;
+  }
+}
+
+.#{$base-prefix}o-show\@tablet-fluid {
+  @include breakpoint(mobile, tablet) {
+    display: none;
+    visibility: hidden;
+  }
+  @include breakpoint(desktop) {
+    display: none;
+    visibility: hidden;
+  }
+}
+
+.#{$base-prefix}o-show\@tablet {
+  @include breakpoint(mobile, mobile) {
+    display: none;
+    visibility: hidden;
+  }
+  @include breakpoint(tablet-fluid, desktop) {
+    display: none;
+    visibility: hidden;
+  }
+}
+
+.#{$base-prefix}o-show\@mobile {
+  @include breakpoint(tablet, desktop) {
+    display: none;
+    visibility: hidden;
+  }
+}
+
+.#{$base-prefix}o-show {
+  display: none;
+  visibility: hidden;
+}

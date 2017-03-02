@@ -1,0 +1,58 @@
+// @BASE -> ELEMENTS -> CLUSTER
+
+
+// Structure from:
+// https://developer.mozilla.org/de/docs/Web/HTML/HTML5/HTML5_element_list
+//
+//  1.
+//
+
+
+// Elements
+
+p {
+  @extend %p !optional;
+}
+
+hr {
+  color: $base-color-element;
+  border: 0;
+  border-bottom-width: $base-border-width * 1px;
+  border-bottom-style: solid;
+  @extend %hr !optional;
+}
+
+pre {
+  @extend %pre !optional;
+}
+
+blockquote {
+  @extend %blockquote !optional;
+}
+
+ol {
+  @extend %ol !optional;
+}
+
+ul {
+  @extend %ul !optional;
+}
+
+li {}
+
+dl {
+  @extend %dl !optional;
+}
+
+dt {}
+
+dd {
+  @extend %dd !optional;
+}
+
+figure {
+  @extend %figure !optional;
+}
+
+figcaption {}
+div {}

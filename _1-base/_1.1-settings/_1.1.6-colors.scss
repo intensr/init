@@ -1,0 +1,51 @@
+// @BASE -> SETTINGS -> COLORS
+
+
+// Basic colors
+$base-color-dark: #000 !default;
+$base-color-neutral: #ccc !default;
+$base-color-bright: #fff !default;
+
+$base-color-one: $base-color-dark !default;
+$base-color-two: $base-color-dark !default;
+$base-color-three: $base-color-dark !default;
+$base-color-four: $base-color-dark !default;
+$base-color-five: $base-color-dark !default;
+
+$base-color-text: $base-color-dark !default;
+$base-color-background: $base-color-bright !default;
+$base-color-hyperlink: $base-color-dark !default;
+$base-color-disabled: $base-color-neutral !default;
+
+// Element colors
+$base-color-element: $base-color-text !default;
+$base-color-element-active: $base-color-one !default;
+$base-color-element-disabled: $base-color-disabled !default;
+$base-color-element-placeholder: $base-color-neutral !default;
+
+// State colors
+$base-color-state-error: #f1484d !default;
+$base-color-state-error-background: #fdf7f7 !default;
+$base-color-state-error-border: $base-color-state-error !default;
+
+$base-color-state-success: #73a345 !default;
+$base-color-state-success-background: #f2f7f2;
+$base-color-state-success-border: $base-color-state-success !default;
+
+$base-color-state-warning: #f0ad4e !default;
+$base-color-state-warning-background: #fcf8f2 !default;
+$base-color-state-warning-border: $base-color-state-warning !default;
+
+$base-color-state-information: #6889cc !default;
+$base-color-state-information-background: #f4f8fa !default;
+$base-color-state-information-border: $base-color-state-information !default;
+
+// Selection colors
+$base-color-selection: $base-color-bright !default;
+$base-color-selection-background: $base-color-dark !default;
+
+// Code colors
+$base-color-code-element: #f2777a !default;
+$base-color-code-value: #99cc99 !default;
+$base-color-code-attribute: #f99157 !default;
+$base-color-code-class: #66999b !default;

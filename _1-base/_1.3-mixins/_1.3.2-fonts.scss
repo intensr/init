@@ -1,0 +1,115 @@
+// @BASE -> MIXINS -> FONTS
+
+
+// Create a fully formed type style (sizing and vertical rhythm) by passing in
+// a single value, e.g.
+//
+// @credit
+// https://github.com/inuitcss/tools.mixins/blob/master/_tools.mixins.scss
+
+
+@mixin font-size($font-size-value, $line-height-value: auto, $force: false) {
+
+  $important: if($force, " !important", "");
+  $font-size-value: strip-unit($font-size-value);
+
+  font-size: (($font-size-value / strip-unit($base-font-size)) * 1rem)#{$important};
+
+  @if $line-height-value == auto {
+    line-height: ceil($font-size-value / $base-line-height) * ($base-line-height /
+      $font-size-value)#{$important};
+  }
+  @else {
+    @if (type-of($line-height-value) == number) {
+      @if unitless($line-height-value) {
+        line-height: $line-height-value#{$important};
+      }
+      @else {
+        line-height: strip-unit($line-height-value) / $font-size-value#{$important};
+      }
+    }
+    @elseif $line-height-value == inherit or $line-height-value == normal {
+      line-height: $line-height-value#{$important};
+    }
+    @elseif ($line-height-value != none and $line-height-value != false) {
+      @warn "D'oh! `#{$line-height-value}` is not a valid value for `line-height`.";
+    }
+  }
+}
+
+
+
+
+
+// Font-face mixin
+// A classical tribute to the css font-face declaration. It generalizes the embedding
+// of fonts.
+
+@mixin font-face(
+    $family,
+    $weight: normal,
+    $italic: false,
+    $eot: true,
+    $woff: true,
+    $ttf: true,
+    $svg: true,
+    $svg-filename: $family,
+    $file: $family,
+    $folder: $base-font-folder
+) {
+    $file: to-lower-case($file);
+    $svg-filename: '#' + to-lower-case(strip-char($svg-filename, " "));
+    $file: to-lower-case(strip-char($family, " "));
+
+    // Naming by typekit
+    // http://help.typekit.com/customer/portal/articles/6855-using-multiple-weights-and-styles
+    // 100 = thin
+    // 200 = extra-light
+    // 300 = light
+    // 400 = normal, book, regular
+    // 500 = medium
+    // 600 = demi-bold, semi-bold
+    // 700 = bold
+    // 800 = heavy
+    // 900 = black
+
+    @if       $weight == 100 { $file: $file + "_thin"; }
+    @else if  $weight == 200 { $file: $file + "_extralight"; }
+    @else if  $weight == 300 { $file: $file + "_light"; }
+    @else if  $weight == 400 { $file: $file + "_regular"; }
+    @else if  $weight == 500 { $file: $file + "_medium"; }
+    @else if  $weight == 600 { $file: $file + "_semibold"; }
+    @else if  $weight == 700 { $file: $file + "_bold"; }
+    @else if  $weight == 800 { $file: $file + "_heavy"; }
+    @else if  $weight == 900 { $file: $file + "_black"; }
+
+    @if $italic { $file: $file + "_italic"; }
+
+    $eot-data: null;
+    @if $eot {
+        $eot-data: url('#{$folder}#{$file}.eot?#iefix') format('embedded-opentype');
+    }
+
+    $woff-data: null;
+    @if $woff {
+        $woff-data: url('#{$folder}#{$file}.woff') format('woff');
+    }
+
+    $ttf-data: null;
+    @if $ttf {
+        $ttf-data: url('#{$folder}#{$file}.ttf') format('truetype');
+    }
+
+    $svg-data: null;
+    @if $svg {
+        $svg-data: url('#{$folder}#{$file}.svg#{$svg-filename}') format('svg');
+    }
+
+    @font-face {
+        font-family: '#{$family}';
+        src: url('#{$folder}#{$file}.eot');
+        src: $eot-data, $woff-data, $ttf-data, $svg-data;
+        @if $weight != false { font-weight: $weight; }
+        @if $italic { font-style: italic; } @else { font-style: normal; }
+    }
+}

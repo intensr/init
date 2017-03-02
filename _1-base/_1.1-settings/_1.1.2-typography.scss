@@ -1,0 +1,27 @@
+// @BASE -> SETTINGS -> TYPOGRAPHY
+
+
+// Font ressources
+$base-font-folder:      "fonts/";
+
+// Font size
+$base-font-size:        16 !default;
+
+// Headings
+$base-font-size-h1:     36 !default;
+$base-font-size-h2:     30 !default;
+$base-font-size-h3:     24 !default;
+$base-font-size-h4:     20 !default;
+$base-font-size-h5:     16 !default;
+$base-font-size-h6:     14 !default;
+
+// Line height
+$base-line-height:             24 !default;
+$base-line-height-ratio:       $base-line-height / $base-font-size !default;
+
+// Font families
+$base-font-family:             sans-serif !default;
+$base-font-family-headings:    $base-font-family !default;
+$base-font-family-icons:       "Icons" !default;
+$base-font-family-serif:       serif !default;
+$base-font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace !default;

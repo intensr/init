@@ -1,0 +1,35 @@
+// @BASE -> SETTINGS -> ELEMENTS
+
+
+// FORM
+
+// Font sizing
+$element-form-font-size: $base-spacing-half !default;
+$element-form-font-weight: normal !default;
+
+// Colors
+$element-form-placeholder-color: $base-color-element !default;
+$element-form-disabled-color: $base-color-disabled !default;
+$element-form-disabled-opacity: 1 !default;
+
+// Checkbox
+$element-form-checkbox-size: $base-spacing !default;
+$element-form-checkbox-checkmark-scale: 0.66 !default;
+$element-form-checkbox-checkmark-color: $base-color-element-active !default;
+$element-form-checkbox-border-color-focus: $base-color-element !default;
+
+// Radio
+$element-form-radio-size: $base-spacing !default;
+$element-form-radio-checkmark-scale: 0.66 !default;
+$element-form-radio-checkmark-color: $base-color-element-active !default;
+$element-form-radio-border-color-focus: $base-color-element !default;
+
+// Button
+$element-button-font-family: $base-font-family !default;
+$element-button-font-size: $base-font-size !default;
+$element-button-line-height: $base-line-height-ratio !default;
+$element-button-color: $base-color-element !default;
+$element-button-border-width: $base-border-width !default;
+$element-button-border-color: $base-color-element !default;
+$element-button-border-width: $base-border-width !default;
+$element-button-border-radius: $base-border-radius !default;

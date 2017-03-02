@@ -1,0 +1,23 @@
+// @CORE -> MIXINS -> GRADIENTS
+
+
+// Linear Gradient
+@mixin linear-gradient($from, $to, $dir: bottom, $use-fallback-ie-9: false) {
+
+  background-image: linear-gradient(to $dir, $from, $to);
+
+  @if $use-fallback-ie-9 {
+    // N.B. this won't work with rounded corners as the `-ms-filter` will overlap
+    // them
+    -ms-filter: quote(progid:DXImageTransform.Microsoft.gradient(
+      startColorstr='#{ie-hex-str($from)}',
+      endColorstr='#{ie-hex-str($to)}')
+    );
+  }
+}
+
+// Radial gradient
+@mixin radial-gradient($inner-color, $outer-color) {
+  background-image: radial-gradient(circle, $inner-color, $outer-color);
+  background-repeat: no-repeat;
+}

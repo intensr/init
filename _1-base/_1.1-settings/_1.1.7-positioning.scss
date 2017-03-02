@@ -1,0 +1,10 @@
+// @BASE -> SETTINGS -> POSITIONING
+
+
+// Z-index ordering
+//
+// @credit
+// http://www.smashingmagazine.com/2014/06/12/sassy-z-index-management-for-complex-layouts/
+
+$base-z-index-elements:   footer, main, header !default;
+$base-off-screen-distance:       -9999px !default;

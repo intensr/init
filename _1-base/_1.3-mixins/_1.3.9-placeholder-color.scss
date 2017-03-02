@@ -1,0 +1,27 @@
+// @BASE -> MIXINS -> PLACEHOLDER COLOR
+
+//
+//
+//
+
+// A mixin that allows you to override the default browser colour for the text
+// input `placeholder` attribute.
+
+
+@mixin placeholder-color($color: $color-text-input-placeholder) {
+  // Webkit
+  ::-webkit-input-placeholder {color: $color;}
+
+  // Firefox 19+
+  ::-moz-placeholder {
+    color: $color;
+    opacity: 1;
+  }
+
+  // IE
+  :-ms-input-placeholder {color: $color;}
+
+  // Standard
+  :input-placeholder {color: $color;}
+  ::input-placeholder {color: $color;}
+}

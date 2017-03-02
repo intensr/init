@@ -1,0 +1,94 @@
+// @CORE -> MIXINS -> FRACTIONS
+
+
+//
+//
+//
+
+// Base fractions
+@mixin generate-fractions($denominator, $breakpoints: false, $prefix: $base-prefix) {
+
+  // Loops through all possible fractions based on the denominator size
+  // 1/12, 2/12, etc...
+  $numerator: 1;
+  @while ($numerator <= $denominator) {
+    @if ($breakpoints != false) {
+
+      // Loops through all available breakpoints and generates a class for every
+      // case. This will be an enormous mass of classes, but is essential for the
+      // grid.
+      $k: 1;
+      @while ($k <= length($base-breakpoints-min-keys)) {
+        $mediaquery: nth($base-breakpoints-min-keys, $k);
+
+
+        @include breakpoint($mediaquery, $mediaquery) {
+          $mediaquery: \@ + $mediaquery;
+          .o-#{$prefix}#{$numerator}\/#{$denominator}#{unquote($mediaquery)} {
+            width: to-percent($numerator, $denominator);
+            flex-basis: to-percent($numerator, $denominator);
+          }
+        }
+        $k: $k + 1;
+      }
+
+    } @else {
+
+      // If no media query is involved
+      .o-#{$prefix}#{$numerator}\/#{$denominator} {
+        width: to-percent($numerator, $denominator);
+        flex-basis: to-percent($numerator, $denominator);
+      }
+
+    }
+    $numerator: $numerator + 1;
+  }
+
+}
+
+$base-fractions-values: map-values($base-fractions);
+
+
+
+
+
+
+
+
+
+
+
+
+// Fractions generated on BEM modifier bases.
+// This can only exist within a BEM structure.
+@mixin generate-fractions-modifier($parent: '', $denominators: $base-fractions-values) {
+
+  // Loops through all base breakpoints
+  $k: 1;
+  $i: 1;
+  @while ($k <= length($base-breakpoints-min-keys)) {
+    $mediaquery: nth($base-breakpoints-min-keys, $k);
+
+    // Loops through all base fractions
+    @include breakpoint($mediaquery) {
+      $mediaquery: \@ + $mediaquery;
+
+      @while ($i <= length($denominators)) {
+        $denominator: nth($denominators, $i);
+
+          // `.parent`
+            &--1\/#{$denominator}#{unquote($mediaquery)} {
+              > .#{$parent}__item {
+                width: to-percent(1, $denominator);
+                flex-basis: to-percent(1, $denominator);
+              }
+            }
+          // `}`
+
+        $i: $i + 1;
+      }
+    }
+    $i: 1;
+    $k: $k + 1;
+  }
+}

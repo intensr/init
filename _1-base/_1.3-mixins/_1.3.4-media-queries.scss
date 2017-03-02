@@ -1,0 +1,255 @@
+// @CORE -> MIXINS -> MEDIA QUERIES
+
+
+// Setup media query mixins for the following Media features
+// (http://www.w3.org/TR/2012/REC-css3-mediaqueries-20120619/#media1):
+//
+// - Width
+// - Height
+// - Resolution
+//
+// The width and height mixins are for applying styles based on the width or
+// height of the viewport, this can either be a minimum width or height or a
+// maximum width or height, or a minimum width or height range or a maximum
+// width or height range. The defaults are "width" and "minimum".
+// The framework has a mobile first approach which means that the media queries
+// are open to infinite rather than to zero. Therefor all breakpoints starting
+// from `mobile` apply on every other higher breakpoint.
+// If you want to scope a range you have to set the default value and also the
+// max size with the same breakpoint, then the media query will be scoped.
+// Default min and max breakpoints can be found here Core -> Settings -> Breakpoints.
+// All sizes for mediaqueries are in em.
+//
+// @credit
+// http://zellwk.com/blog/media-query-units/
+//
+// `$default-value` (min-breakpoint based) accepts:
+// - numbers
+//   - the number zero:
+//     - literally zero
+//     - infinite
+//     - unset
+//     N.B. If min and max result in zero a @warn will be shown which tells that
+//     the media query is obsolete.
+// - strings (breakpoints)
+//     N.B. only known breakpoints other strings result in @error.
+// - lists
+//   - lists with numbers
+//   - lists with breakpoints
+//     N.B Currently its only possible to pass a ordered list with smallest
+//     value first and the biggest value last. Mixed lists including numbers and
+//     breakpoints are not possible at the moment but planned.
+//
+// `$max-value` (max-breakpoint based) accepts:
+// - numbers
+// - breakpoints
+//   N.B. If the $default-value is using a range the default $max-value will be ignored.
+//
+// `$axis` accepts:
+// - "width"
+// - "height"
+
+
+
+
+
+
+
+
+
+// Breakpoints
+// Due to the huge usage of this mixin and the common understanding of the topic
+// it gets the name breakpoint, even if its capable of applying ranges, but
+// `ranges` is very generic and difficult to understand and `media-query` also and
+// any additional word makes it really annoying to use regarding its high usage.
+@mixin breakpoint($default-value: 0, $max-value: 0, $axis: "width") {
+
+  // Decrypts list/range based breakpoints
+  @if (type-of($default-value) == 'list') {
+
+    // Determine difference between additional and compound queries
+    // Additional: Adding up serial range after range with one min one max value
+    // Compound : Ranges can have a gap between each other which can result in
+    //            more than one min and max value in mediaquery
+
+    /* so by now just additional lists are possible */
+    @if (true) {
+
+      // Additional queries (zb. tablet + tablet-fluid), so still just one min and
+      // one max value.
+
+      // Get min values for additional query
+      $additional-media-query-min: ();
+
+      @each $key, $value in $base-breakpoints-min {
+        @each $index in $default-value {
+          @if ($index == $key) {
+            $additional-media-query-min: append($additional-media-query-min, $value);
+          }
+        }
+      }
+
+      @if (length($additional-media-query-min) != length($default-value)) {
+        @error "There is at least one named breakpoint that does not exist!";
+      }
+
+      // Determine smallest value and push into final var
+      // N.B This just works if the list in the breakpoint arguments is sorted
+      $additional-media-query-min: list-first($additional-media-query-min);
+
+      // Get max values for additional query
+      $additional-media-query-max: ();
+
+      @each $key, $value in $base-breakpoints-max {
+        @each $index in $default-value {
+          @if ($index == $key) {
+            $additional-media-query-max: append($additional-media-query-max, $value);
+          }
+        }
+      }
+
+      // Determine biggest value and push into final var
+      // N.B This just works if the list in the breakpoint arguments is sorted
+      $additional-media-query-max: list-last($additional-media-query-max);
+
+
+      // Push both values into $default-value and $max-value
+      $default-value: $additional-media-query-min;
+      $max-value: $additional-media-query-max;
+
+    } @elseif (false) { /* future compound condition goes here */
+
+      // Compound queries (e.g. mobile + tablet + (tablet-fluid would follow but is missing) + laptop)
+      // which ultimatly mean more than one min and one max value.
+
+      /* here needs to be one more exit which generates the compound media query */
+      @media (min-#{$axis}: 1px) and (max-#{$axis}: 1px) {
+        @content;
+      }
+
+    }
+
+  } // END list decryption
+
+  // Decrypts name based max-breakpoint to numeric value.
+  @if (type-of($max-value) == 'string') {
+    $max-value: map-get($base-breakpoints-max, $max-value);
+  }
+
+  // Decrypts name based min-breakpoint to numeric value.
+  @if (type-of($default-value) == 'string') {
+    $default-value: map-get($base-breakpoints-min, $default-value);
+  }
+
+  //@warn $default-value;
+  //@warn $max-value;
+
+  // If both name based breakpoints have zero values the usage of the mixin is obsolete.
+  @if ($default-value == 0 and $max-value == 0) {
+    // @warn "Min and max values both result in zero, which make the breakpoint mixin obsolete."; // bugs atm in automated scripts to generate queries
+    @content;
+  }
+
+  // Choosing a suitable media query for passed breakpoints.
+
+  // Numeric min-based media query.
+  @if (type-of($default-value) == 'number' and $default-value != 0 and $max-value == 0) {
+    // Includes only min breakpoint.
+    @media (min-#{$axis}: to-em(strip-unit($default-value), 16)) {
+      @content;
+    }
+  }
+
+  // Numeric max-based media query.
+  @if (type-of($max-value) == 'number' and $default-value == 0 and $max-value != 0) {
+    // Includes only max breakpoint.
+    @media (max-#{$axis}: to-em(strip-unit($max-value), 16)) {
+      @content;
+    }
+  }
+
+  // Numeric range(min&max)-based media query.
+  @if (type-of($default-value) == 'number' and
+       type-of($max-value) == 'number' and
+       $default-value != 0 and $max-value != 0) {
+    // Includes min and max breakpoint (range).
+    @media (min-#{$axis}: to-em(strip-unit($default-value), 16)) and
+           (max-#{$axis}: to-em(strip-unit($max-value), 16)) {
+      @content;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Apply breakpoints to element
+// Applies breakpoints to default classes if needed, which makes these classes
+// scale with the current settings of the framework and also keeps the workflow
+// DRY.
+// N.B. Just works with set breakpoints, no loose numbers allowed.
+@mixin breakpoints-to-element($element: '', $global: true, $breakpoints: $base-breakpoints-min-keys) {
+
+  @if $global {
+    // Includes the element as default element first, which applies the setting global if
+    // needed. If the settings needs to be customized the responsive classes will override
+    // this class.
+    #{$element} {
+      @content;
+    }
+  }
+
+  $k: 1;
+  @while ($k <= length($breakpoints)) {
+
+    $breakpoint: nth($breakpoints, $k);
+
+    // Applies range to the element
+    @include breakpoint($breakpoint, $breakpoint) {
+
+      $breakpoint: \@ + $breakpoint;
+
+      #{$element}#{unquote($breakpoint)} {
+        @content;
+      }
+    }
+    $k: $k + 1;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Resolution
+// To address displays such as retina
+@mixin resolution($resolution: $retina-resolution) {
+  $resolution: if(unitless($resolution), $resolution * 96dpi, $resolution);
+
+  @media (min-resolution: $resolution) {
+    @content;
+  }
+}

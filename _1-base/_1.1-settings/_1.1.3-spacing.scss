@@ -1,0 +1,31 @@
+// @BASE -> SETTINGS -> SPACING
+
+
+// Base spacing
+$base-spacing:                    $base-line-height !default;
+
+// Reduce base spacing
+$base-spacing-nano:               1 !default;
+$base-spacing-micro:              2 !default;
+
+$base-spacing-half:               floor($base-spacing / 2) !default;
+$base-spacing-third:              floor($base-spacing / 3) !default;
+$base-spacing-thirds:             floor(($base-spacing / 3) * 2) !default;
+$base-spacing-quarter:            floor($base-spacing / 4) !default;
+$base-spacing-quarters:           floor(($base-spacing / 4) * 3) !default;
+$base-spacing-sixth:              floor($base-spacing / 6) !default;
+$base-spacing-eight:              floor($base-spacing / 8) !default;
+
+// Increase base spacing
+$base-spacing-double:             $base-spacing * 2 !default;
+$base-spacing-triple:             $base-spacing * 3 !default;
+$base-spacing-quadrouple:         $base-spacing * 4 !default;
+
+// Base spacing combinations
+$base-spacing-plus-half:          $base-spacing + $base-spacing-half !default;
+$base-spacing-plus-third:         $base-spacing + $base-spacing-third !default;
+$base-spacing-plus-thirds:        $base-spacing + ($base-spacing-third * 2) !default;
+$base-spacing-plus-quarter:       $base-spacing + $base-spacing-quarter !default;
+$base-spacing-plus-quarters:      $base-spacing + ($base-spacing-quarter * 3) !default;
+$base-spacing-plus-sixth:         $base-spacing + $base-spacing-sixth !default;
+$base-spacing-plus-micro:         $base-spacing + $base-spacing-micro !default;

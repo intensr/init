@@ -1,0 +1,12 @@
+// @BASE -> SETTINGS -> CORE
+
+
+// Base Prefix
+$use-base-prefix: false;
+$base-prefix: '' !default;
+
+@if $use-base-prefix {
+  $base-prefix: $base-prefix + '-';
+} @else {
+  $base-prefix: '';
+}

@@ -1,0 +1,11 @@
+// @BASE -> SETTINGS -> BORDER
+
+
+// Width
+$base-border-width: 2 !default;
+$base-border-width-half: ceil($base-border-width / 2) !default;
+
+// Radius
+$base-border-radius: 4 !default;
+$base-border-radius-half: ceil($base-border-radius / 2) !default;
+$base-border-radius-quarter: ceil($base-border-radius / 4) !default;

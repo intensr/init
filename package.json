@@ -1,0 +1,29 @@
+{
+  "name": "init",
+  "version": "1.0.0",
+  "description": "init is an OOCSS-, ITCSS-, BEMET-, SCSS-based, reasonable opinionated, entrypoint framework.",
+  "homepage": "intenser.de",
+  "keywords": [
+    "intender",
+    "css",
+    "oocss",
+    "sass",
+    "scss",
+    "bem",
+    "bemet",
+    "itcss",
+    "responsive"
+  ],
+  "author": [
+    {
+      "name":   "David Hoffmann",
+      "email":  "contact@intenser.de",
+      "url":    "intenser.de"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url":  "git@github.com:intensr/init.git"
+  },
+  "license": "Apache-2.0"
+}

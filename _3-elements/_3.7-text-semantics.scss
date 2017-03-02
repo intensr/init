@@ -1,0 +1,55 @@
+// @BASE -> ELEMENTS -> SEMANTIC TEXT
+
+
+// Structure from:
+// https://developer.mozilla.org/de/docs/Web/HTML/HTML5/HTML5_element_list
+//
+//  1. Reset: Same behaviour in every browser
+//  2. Setting: Applies base setting
+//  3. IE10 applies grey background to links
+
+
+// Elements
+
+a {
+  text-decoration: none; // 1
+  color: $base-color-hyperlink; // 2
+  background-color: transparent; // 1,3
+}
+
+em {}
+strong {}
+small {}
+s {}
+cite {}
+q {}
+dfn {}
+
+abbr {
+  @extend %abbr !optional;
+}
+
+data {}
+time {}
+code {}
+var {}
+samp {}
+kbd {}
+sub {}
+sup {}
+i {}
+b {}
+
+u {
+  @extend %u !optional;
+}
+
+mark {}
+ruby {}
+rt {}
+rp {}
+bdi {}
+bdo {}
+span {}
+br {}
+wbr {}

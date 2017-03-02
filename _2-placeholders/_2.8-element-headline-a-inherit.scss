@@ -1,0 +1,17 @@
+// @BASE -> PLACEHOLDERS -> ELEMENT HEADLINE A INHERIT
+
+
+// This rule is especially for headlines which function as links. It keeps the
+// color of the headline instead of overriding it with the base link color.
+
+
+%h1,
+%h2,
+%h3,
+%h4,
+%h5,
+%h6 {
+  a {
+    color: inherit;
+  }
+}

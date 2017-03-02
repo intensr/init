@@ -1,0 +1,520 @@
+// form elements       - Every element included in forms.
+//
+// elements 	       - ::, form, fieldset, legend, label, input, button, select,
+//                       datalist, optgroup, option, textarea, keygen, output,
+//                       progress, meter
+//
+// additional elements -
+//
+// moved elements      -
+//
+// links               - https://developer.mozilla.org/de/docs/Web/HTML/HTML5/HTML5_element_list
+//
+// normalize & fixes
+//
+//  1: Correct `inline-block` display not defined in IE 8/9.
+//  2: Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+//  3: Known limitation: by default, Chrome and Safari on OS X allow very limited
+//     styling of `select`, unless a `border` property is set.
+//  4: Correct color not being inherited.
+//     Known issue: affects color of disabled elements.
+//  5: Correct font properties not being inherited.
+//  6: Address margins set differently in Firefox 4+, Safari, and Chrome.
+//  7: Reset
+//  8: Address `overflow` set to `hidden` in IE 8/9/10/11.
+//  9: Address inconsistent `text-transform` inheritance for `button` and `select`.
+//     All other form control elements do not inherit `text-transform` values.
+// 10: Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+// 11: Correct `select` style inheritance in Firefox.
+// 12: Add html element to avoid the WebKit bug in Android 4.0.* where native
+//     `audio`, `video` controls get destroyed.
+//     https://github.com/h5bp/mobile-boilerplate/issues/121
+// 13: Correct inability to style clickable `input` types in iOS.
+// 14: Improve usability and consistency of cursor style between image-type
+//     `input` and others.
+// 15: Re-set default cursor for disabled elements.
+// 16: Remove inner padding and border in Firefox 4+.
+// 17: Address Firefox 4+ setting `line-height` on `input` using `!important` in
+//     the UA stylesheet.
+//     -----
+//     line-height is set anyway
+// 18: It's recommended that you don't attempt to style these elements.
+//     Firefox's implementation doesn't respect box-sizing, padding, or width.
+//     -----
+//     This is outdated in terms of that the framework does not support old versions
+//     of Firefox.
+// 19: Address box sizing set to `content-box` in IE 8/9/10.
+// 20: Remove excess padding in IE 8/9/10.
+// 21: Fix the cursor style for Chrome's increment/decrement buttons. For certain
+//     `font-size` values of the `input`, it causes the cursor style of the
+//     decrement button to change from `default` to `text`.
+// 22: Address `appearance` set to `searchfield` in Safari and Chrome.
+// 23: Address `box-sizing` set to `border-box` in Safari and Chrome
+//     (include `-moz` to future-proof).
+//     -----
+//     Makes no sense in my opinion because it does the exact opposite thing,
+//     so I disabled it.
+// 24: Remove inner padding and search cancel button in Safari and Chrome on OS X.
+//     Safari (but not Chrome) clips the cancel button when the search input has
+//     padding (and `textfield` appearance).
+//     -----
+//     Is this state of art?
+// 25: Define consistent border, margin, and padding.
+// 26: Correct `color` not being inherited in IE 8/9/10/11.
+// 27: Remove padding so people aren't caught out if they zero out fieldsets.
+// 28: Remove default vertical scrollbar in IE 8/9/10/11.
+// 29: Only allow vertical resize to prevent destroying the layout.
+// 30: NOTE: Don't inherit the `font-weight` (applied by a rule above), the default
+//     cannot safely be changed in Chrome and Safari on OS X.
+// 31: Px based values will cause cursor jumping if field is empty.
+//     - http://stackoverflow.com/questions/26270582/html-input-cursor-position-issue-in-chrome-when-value-is-empty
+// 32: Fluid manipulation of textarea line-height to prevent zero spacing between
+//     lines.
+
+
+@if $use-elements and $use-elements-form {
+
+	::-webkit-input-placeholder {
+		text-overflow: ellipsis;
+		color: $form-placeholder-color;
+	}
+
+	form {
+		@if $use-base-grids {
+			.grid .grid__column input[type=text],
+			.grid .grid__column input[type=email],
+			.grid .grid__column input[type=password],
+			.grid .grid__column input[type=date],
+			.grid .grid__column select,
+			.grid .grid__column textarea {
+				width: 100%;
+			}
+		}
+	}
+
+	fieldset {
+		@if $use-reset {
+			border: 0; // 7
+			margin: 0; // 7
+			padding: 0; // 7
+		}
+	    @if $use-normalize and $use-reset == false {
+	    	border: 1px solid #c0c0c0; // 25
+	    	margin: 0 2px; // 25
+	    	padding: 0.35em 0.625em 0.75em; // 25
+		}
+	}
+
+	legend {
+	    @if $use-normalize {
+	    	border: 0; // 26
+	    	padding: 0; // 27
+	    }
+	}
+
+	label {
+		display: block;
+		font-weight: 700;
+		padding-right: $base-spacing-half;
+		box-sizing: border-box;
+		font-weight: normal;
+		p { margin: 0; }
+		&.checkable {
+			user-select: none;
+			display: inline-block;
+			cursor: pointer;
+			margin-top: $base-spacing-half;
+			margin-bottom: $base-spacing-half;
+			padding: 0;
+
+			input, select {
+				margin: 0;
+			}
+
+			textarea {
+				margin: $base-spacing / 4 0 0 0;
+				min-height: $base-spacing * 3 + 1;
+				height: $base-spacing * 3 + 1;
+			}
+			&.disabled {
+				cursor: not-allowed;
+				color: $form-disabled-color;
+				@if $form-disabled-opacity != 1 {
+					opacity: $form-disabled-opacity;
+					input[type="radio"],
+					input[type="checkbox"] {
+						opacity: 1;
+					}
+				}
+			}
+		}
+	}
+
+	input {
+		@if $use-normalize {
+			// line-height: normal; // 17
+			color: inherit; // 3, 4
+	        font: inherit; // 3, 5
+	        margin: 0; // 3, 6
+	    }
+		background: transparent;
+		font-size: $form-font-size;
+		font-weight: $form-font-weight;
+		line-height: 1; // 31
+		outline: 0;
+		height: $base-spacing * 1.5;
+		border: $base-border-width solid $base-color-element;
+		border-radius: $base-border-radius-half;
+		padding: 0 $base-spacing-quarter;
+		box-sizing: border-box;
+		transition: all 0.2s ease-in-out;
+		max-width: 100%;
+		margin-bottom: $base-spacing;
+		&:disabled {
+			color: $form-disabled-color;
+			border-color: $form-disabled-color;
+			@if $use-normalize {
+    			// cursor: default; // 15
+    		}
+			cursor: not-allowed;
+			@if $form-disabled-opacity != 1 {
+				opacity: $form-disabled-opacity;
+			}
+		}
+		&:focus {
+			border-color: $base-color-element-active;
+		}
+	}
+
+	input::-moz-focus-inner {
+	    @if $use-normalize {
+	    	border: 0; // 15
+	    	padding: 0; // 15
+	    }
+	}
+
+	html input[type="button"] { // 12
+	    @if $use-normalize {
+	    	-webkit-appearance: button; // 13
+	    	cursor: pointer; // 14
+	    }
+	}
+
+	input[type="reset"] {
+	    @if $use-normalize {
+	    	-webkit-appearance: button; // 13
+	    	cursor: pointer; // 14
+	    }
+	}
+
+	input[type="submit"] {
+	    @if $use-normalize {
+	    	-webkit-appearance: button; // 13
+	    	cursor: pointer; // 14
+		}
+	}
+
+	input[type="checkbox"] {
+		@if $use-normalize {
+			box-sizing: border-box; // 18, 19
+    		padding: 0; // 18, 20
+    	}
+		border-width: $base-border-width;
+		border-style: solid;
+		cursor: pointer;
+		display: inline-block;
+		height: $form-checkbox-size;
+		width: $form-checkbox-size;
+		margin-top: -4px !important;
+		margin-bottom: $base-spacing;
+		text-align: center;
+		vertical-align: middle;
+		-webkit-appearance: none;
+		position: relative;
+		&:checked {
+			&:before {
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				display: inline-block;
+				vertical-align: middle;
+				background: $form-checkbox-checkmark-color;
+				border-radius: 2px;
+				speak: none;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				$form-checkbox-checkmark-scale: floor($form-checkbox-size * $form-checkbox-checkmark-scale);
+				@if $form-checkbox-size % 2 != 0px {
+					@if $form-checkbox-checkmark-scale % 2 != 0px {
+						$form-checkbox-checkmark-scale: $form-checkbox-checkmark-scale - 1;
+					}
+					$form-checkbox-checkmark-scale: $form-checkbox-checkmark-scale + 1;
+					@if $form-checkbox-size % 3 == 0px {
+						@if $form-checkbox-checkmark-scale % 2 == 0px {
+							$form-checkbox-checkmark-scale: $form-checkbox-checkmark-scale + 1;
+						}
+					}
+				} @else if $form-checkbox-size % 2 == 0px {
+					@if $form-checkbox-checkmark-scale % 2 != 0px {
+						$form-checkbox-checkmark-scale: $form-checkbox-checkmark-scale + 1;
+					}
+				}
+				margin: ($form-checkbox-checkmark-scale / -2) 0 0 ($form-checkbox-checkmark-scale / -2);
+			    width: $form-checkbox-checkmark-scale;
+				height: $form-checkbox-checkmark-scale;
+			}
+		}
+		&:focus { border-color: $form-checkbox-border-color-focus; }
+		&:disabled {
+			cursor: not-allowed;
+			&:before {
+				background: $form-disabled-color;
+				@if $form-disabled-opacity != 1 {
+					opacity: $form-disabled-opacity;
+				}
+			}
+		}
+	}
+
+	input[type="radio"] {
+		@if $use-normalize {
+			box-sizing: border-box; // 18, 19
+    		padding: 0; // 18, 20
+    	}
+		border-width: $base-border-width;
+		border-style: solid;
+		border-radius: 50%;
+		cursor: pointer;
+		display: inline-block;
+		height: $form-radio-size;
+		width: $form-radio-size;
+		margin-top: -4px !important;
+		margin-bottom: $base-spacing;
+		text-align: center;
+		vertical-align: middle;
+		-webkit-appearance: none;
+		position: relative;
+		&:checked {
+			&:before {
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				display: inline-block;
+				vertical-align: middle;
+				background: $base-color-element-active;
+				border-radius: 50%;
+				speak: none;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				$form-radio-checkmark-scale: floor($form-radio-size * $form-radio-checkmark-scale);
+				@if $form-radio-size % 2 != 0px {
+					@if $form-radio-checkmark-scale % 2 != 0px {
+						$form-radio-checkmark-scale: $form-radio-checkmark-scale - 1;
+					}
+					$form-radio-checkmark-scale: $form-radio-checkmark-scale + 1;
+					@if $form-radio-size % 3 == 0px {
+						@if $form-radio-checkmark-scale % 2 == 0px {
+							$form-radio-checkmark-scale: $form-radio-checkmark-scale + 1;
+						}
+					}
+				} @else if $form-radio-size % 2 == 0px {
+					@if $form-radio-checkmark-scale % 2 != 0px {
+						$form-radio-checkmark-scale: $form-radio-checkmark-scale + 1;
+					}
+				}
+				margin: ($form-radio-checkmark-scale / -2) 0 0 ($form-radio-checkmark-scale / -2);
+			    width: $form-radio-checkmark-scale;
+				height: $form-radio-checkmark-scale;
+			}
+		}
+		&:focus { border-color: $form-radio-border-color-focus; }
+		&:disabled {
+			cursor: not-allowed;
+			&:before {
+				background: $form-disabled-color;
+				@if $form-disabled-opacity != 1 {
+					opacity: $form-disabled-opacity;
+				}
+			}
+		}
+	}
+
+	input[type="file"] {
+		margin: ceil($base-spacing / 4) 0 ($base-spacing-quarter + $base-spacing) 0;
+		border: 0;
+		padding: 0;
+		height: $base-spacing;
+	}
+
+	input[type="color"] {
+		cursor: pointer;
+		vertical-align: top;
+	}
+
+	input[type="number"]::-webkit-inner-spin-button {
+    	@if $use-normalize {
+    		height: auto; // 21
+    	}
+	}
+
+	input[type="number"]::-webkit-outer-spin-button {
+		@if $use-normalize {
+	    	height: auto; // 21
+	    }
+	}
+
+    input[type="search"] {
+    	@if $use-normalize {
+    		-webkit-appearance: textfield; // 22
+    		// box-sizing: content-box; // 23
+    	}
+    }
+
+	input[type="search"]::-webkit-search-cancel-button {
+		@if $use-normalize {
+    		-webkit-appearance: none; // 24
+    	}
+	}
+
+	input[type="search"]::-webkit-search-decoration {
+		@if $use-normalize {
+	    	-webkit-appearance: none; // 24
+	    }
+	}
+
+	button {
+		@if $use-normalize {
+			text-transform: none; // 9, 10
+			overflow: visible; // 8
+	        color: inherit; // 3, 4
+	        font: inherit; // 3, 5
+	        margin: 0; // 3, 6
+	        -webkit-appearance: button; // 13
+	    	cursor: pointer; // 14
+	    }
+	}
+
+	button[disabled] {
+	    @if $use-normalize {
+	    	cursor: default; // 15
+		}
+	}
+
+	button::-moz-focus-inner {
+		@if $use-normalize {
+	    	border: 0; // 15
+	    	padding: 0; // 15
+	    }
+	}
+
+	select {
+		@if $use-normalize {
+			text-transform: none; // 9, 11
+			color: inherit; // 3, 4
+        	font: inherit; // 3, 5
+        	margin: 0; // 3, 6
+        }
+		background: transparent;
+		font-size: $form-font-size;
+		font-weight: $form-font-weight;
+		outline: 0;
+		height: $base-spacing * 1.5;
+		line-height: $base-spacing * 1.5 - $base-border-width * 2;
+		border: $base-border-width solid $base-color-element;
+		border-radius: $base-border-radius-half;
+		padding: 0 $base-spacing-quarter;
+		box-sizing: border-box;
+		transition: all 0.2s ease-in-out;
+		max-width: 100%;
+		cursor: pointer;
+		-webkit-appearance: none;
+		margin-bottom: $base-spacing;
+
+		$select-background-color: transparent;
+		@if ($base-color-element == #fff) { $select-background-color: $base-color-two; }
+		@media screen and ( -webkit-min-device-pixel-ratio:0 ) {
+			background: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="35px" height="35px" viewBox="0 0 35 35" enable-background="new 0 0 35 35" xml:space="preserve"><polygon style="fill: #{$base-color-element};" fill-rule="evenodd" clip-rule="evenodd" points="20.8,14.6 18,17.4 15.2,14.6 13.8,16 18,20.2 22.2,16 "/></svg>') no-repeat $select-background-color center right;
+			padding-right: $base-spacing * 1.5;
+			&:focus { background: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="35px" height="35px" viewBox="0 0 35 35" enable-background="new 0 0 35 35" xml:space="preserve"><polygon fill="#{$base-color-element-active}" fill-rule="evenodd" clip-rule="evenodd" points="20.8,14.6 18,17.4 15.2,14.6 13.8,16 18,20.2 22.2,16 "/></svg>') no-repeat $select-background-color center right; }
+		}
+
+		&:disabled {
+			cursor: not-allowed;
+			border-color: $form-disabled-color;
+			@if $form-disabled-opacity != 1 {
+				opacity: $form-disabled-opacity;
+			}
+		}
+	}
+
+	select:focus {
+		border-color: $base-color-element-active;
+	}
+
+	datalist {}
+
+	optgroup {
+		@if $use-normalize {
+			color: inherit; // 3, 4
+        	font: inherit; // 3, 5
+        	margin: 0; // 3, 6
+        	font-weight: bold; // 30
+        }
+	}
+
+	option {
+		font-size: $form-font-size;
+	}
+
+	textarea {
+		@if $use-normalize {
+			color: inherit; // 3, 4
+        	font: inherit; // 3, 5
+        	margin: 0; // 3, 6
+			overflow: auto; // 28
+		}
+		resize: vertical; // 29
+		display: block;
+		background: transparent;
+		font-size: $form-font-size;
+		font-weight: $form-font-weight;
+		line-height: 1.3; // 31, 32
+		outline: 0;
+		min-height: $base-spacing * 3;
+		height: $base-spacing * 3;
+		border: $base-border-width solid $base-color-element;
+		border-radius: $base-border-radius-half;
+		padding: $base-spacing-half $base-spacing-quarter;
+		box-sizing: border-box;
+		max-width: 100%;
+		margin-bottom: $base-spacing;
+		transition: border 0.2s ease-in-out;
+		&:disabled {
+			cursor: not-allowed;
+			resize: none;
+			border-color: $form-disabled-color;
+			@if $form-disabled-opacity != 1 {
+				opacity: $form-disabled-opacity;
+			}
+		}
+	}
+
+	textarea:focus {
+		border-color: $base-color-element-active;
+	}
+
+	keygen {}
+
+	output {}
+
+	progress {
+		@if $use-normalize {
+			display: inline-block; // 1
+			vertical-align: baseline; // 2
+		}
+	}
+
+	meter {}
+}

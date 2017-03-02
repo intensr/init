@@ -1,0 +1,23 @@
+// @BASE -> ELEMENTS -> INTERACTIVE
+
+
+// Structure from:
+// https://developer.mozilla.org/de/docs/Web/HTML/HTML5/HTML5_element_list
+//
+//  1. RULE: Details marker
+//  2. Opinion: It is usable so it should be marked as controlable
+
+
+// Elements
+
+details {}
+
+summary {
+  cursor: pointer; // 2
+  &::-webkit-details-marker {
+    display: none; // 1
+  }
+}
+
+command {}
+menu {}

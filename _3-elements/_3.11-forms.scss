@@ -1,0 +1,43 @@
+// @BASE -> ELEMENTS -> FORMS
+
+
+// Structure from:
+// https://developer.mozilla.org/de/docs/Web/HTML/HTML5/HTML5_element_list
+//
+//  1.
+//
+
+
+// Button
+%o-button,
+button,
+[type="button"],
+[type="submit"],
+[type="reset"] {
+  @extend %button !optional;
+}
+
+form {
+  @extend %form !optional;
+}
+
+fieldset {
+  @extend %fieldset !optional;
+}
+
+legend {
+  @extend %legend !optional;
+}
+
+label {}
+input {}
+button {}
+select {}
+datalist {}
+optgroup {}
+option {}
+textarea {}
+keygen {}
+output {}
+process {}
+meter {}

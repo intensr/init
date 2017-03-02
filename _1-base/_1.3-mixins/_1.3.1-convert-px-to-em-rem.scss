@@ -1,0 +1,56 @@
+// @CORE -> MIXINS -> CONVERT PX TO EM/REM
+
+
+// Convert `px` to `em`s or `rem`s for multiple properties or values or
+// both. Accepts a list of lists (instead a list of values) for properties
+// that accept multiple lists of values. Only numbers are converted;
+// everything else is passed through. For the `to-em` `@mixin` `$context` is
+// an optional argument that allows making measurements relative to the parent
+// font size rather than the current.
+
+
+// A generic mixin that is used by the `to-em()` and `to-rem()` mixins below
+@mixin to-em-or-rem($unit, $properties, $sizes, $context, $force) {
+
+  $values: ();
+  $sublists: false;
+  $unit: if($unit == "em", 1em, 1rem);
+  $important: if($force, " !important", "");
+
+  @each $s in $sizes {
+
+    @if type-of($s) == list {
+      $sublists: true;
+      $vv: ();
+
+      @each $ss in $s {
+        $vv: append($vv, if(type-of($ss) == number and $ss != 0, strip-unit($ss) / strip-unit($context) * $unit, strip-unit($ss)));
+      }
+
+      $values: append($values, join((), $vv));
+    }
+    @else {
+      $values: append($values, if(type-of($s) == number and $s != 0, strip-unit($s) / strip-unit($context) * $unit,
+        strip-unit($s)));
+    }
+  }
+
+  $value: join((), $values, if($sublists, comma, space));
+
+  @each $prop in $properties {
+    #{$prop}: $value#{$important};
+  }
+}
+
+
+// To `em`
+@mixin to-em($properties, $sizes, $context: false, $force: false) {
+  $context: if($context == false or $context == "", $base-font-size, $context);
+  @include to-em-or-rem("em", $properties, $sizes, $context, $force);
+}
+
+
+// To `rem`
+@mixin to-rem($properties, $sizes, $force: false) {
+  @include to-em-or-rem("rem", $properties, $sizes, $base-font-size, $force);
+}

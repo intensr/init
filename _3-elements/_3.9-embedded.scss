@@ -1,0 +1,53 @@
+// @BASE -> ELEMENTS -> EMBEDDED
+
+
+// Structure from:
+// https://developer.mozilla.org/de/docs/Web/HTML/HTML5/HTML5_element_list
+//
+//  1. Fix bottom gap of images.
+//  2. Responsive image approach
+//  3. So that `alt` text is visually offset if images don't load.
+//
+//  @credit
+//  Scally framework
+
+
+// Elements
+
+img {
+  max-width: 100%; // 2
+  height: auto; // 2
+  font-style: italic; // 3
+  @extend %img !optional;
+}
+
+iframe {
+  @extend %audio !optional;
+}
+embed {}
+object {}
+param {}
+
+video {
+  @extend %audio !optional;
+}
+
+audio {
+  @extend %audio !optional;
+}
+
+source {}
+track {}
+
+canvas {
+  @extend %audio !optional;
+}
+
+map {}
+area {}
+
+svg {
+  @extend %audio !optional;
+}
+
+math {}

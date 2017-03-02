@@ -1,0 +1,50 @@
+// @CORE -> FUNCTIONS -> STRIP UNIT
+
+
+// Strip units from a number.
+//
+// @credit
+// https://css-tricks.com/snippets/sass/strip-unit-function/
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+
+
+
+
+
+// Strips a single char from a string
+// @credit
+// Scally Framework
+@function strip-char($string, $char) {
+  $stringLength: str-length($string);
+  $stringNew: "";
+  $i: 0;
+
+  @while $i <= $stringLength {
+    $charIndex: str-index($string, $char);
+    $charIndexAlt: "";
+
+    @if $charIndex == null and $i == 0 {
+      $charIndexAlt: 2;
+    } @else if $charIndex == null and $i != 0 {
+      @return $string;
+    } @else {
+      $charIndexAlt: $charIndex;
+    }
+
+    @if $charIndex == null and $i == 0 {
+      $string: str-slice($string, 1, $charIndexAlt - 1) + str-slice($string, $charIndexAlt);
+    } @else {
+      $string: str-slice($string, 1, $charIndexAlt - 1) + str-slice($string, $charIndexAlt + 1);
+    }
+
+    $i: $i + 1;
+    $stringNew: $stringNew + $string;
+  }
+}

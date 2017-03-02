@@ -1,0 +1,9 @@
+// @CORE -> PLACEHOLDER -> RESET ELEMENT HOVER INFO
+
+
+// Give a help cursor to elements that give extra info on `:hover`.
+%abbr {
+  &[title] {
+    cursor: help;
+  }
+}

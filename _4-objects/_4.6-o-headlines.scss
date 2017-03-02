@@ -1,0 +1,43 @@
+// @OBJECTS -> HEADLINES
+
+
+// This object basically exists for double stranding and as basis for component
+// headlines. These classes can be extended but should never be repeated in
+// declaration anywhere in your scss files.
+
+
+// Headline 1
+.o-h1 {
+  @extend %h1 !optional;
+  @extend %o-h1 !optional;
+}
+
+// Headline 2
+.o-h2 {
+  @extend %h2 !optional;
+  @extend %o-h2 !optional;
+}
+
+// Headline 3
+.o-h3 {
+  @extend %h3 !optional;
+  @extend %o-h3 !optional;
+}
+
+// Headline 4
+.o-h4 {
+  @extend %h4 !optional;
+  @extend %o-h4 !optional;
+}
+
+// Headline 5
+.o-h5 {
+  @extend %h5 !optional;
+  @extend %o-h5 !optional;
+}
+
+// Headline 6
+.o-h6 {
+  @extend %h6 !optional;
+  @extend %o-h6 !optional;
+}

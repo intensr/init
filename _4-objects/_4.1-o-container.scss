@@ -1,0 +1,25 @@
+// @OBJECTS -> CONTAINER
+
+
+//
+//
+//
+
+
+// Container
+.o-#{$base-prefix}container {
+  &-grid {
+    margin: 0 auto;
+    @include breakpoint(mobile, mobile) {
+      width: 100%;
+      @include to-rem(padding, 0 $base-spacing);
+    }
+    @include breakpoint(tablet, tablet) {
+      width: 100%;
+      @include to-rem(padding, 0 $base-spacing);
+    }
+    @include breakpoint(tablet-fluid, tablet-fluid) { width: to-em(720, 16); }
+    @include breakpoint(laptop, laptop) { width: to-em(960, 16); }
+    @include breakpoint(desktop, desktop) { width: to-em(1240, 16); }
+  }
+}

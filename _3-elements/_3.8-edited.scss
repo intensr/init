@@ -1,0 +1,17 @@
+// @BASE -> ELEMENTS -> EDITED
+
+
+// Structure from:
+// https://developer.mozilla.org/de/docs/Web/HTML/HTML5/HTML5_element_list
+//
+//  1. Opinion: Apply faux underlines to inserted text via `border-bottom`.
+//
+
+
+// Elements
+
+del {}
+ins {
+  border-bottom: 1px solid; // 1
+  @extend %ins !optional; 
+}

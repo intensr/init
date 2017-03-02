@@ -1,0 +1,43 @@
+// @CORE -> UTILITIES -> HIDE
+
+
+// Hides the element at a specific range.
+
+
+.#{$base-prefix}u-hide {
+  display: none!important;
+  visibility: hidden!important;
+}
+
+.#{$base-prefix}u-hide\@desktop {
+  @include breakpoint(desktop, desktop) {
+    display: none!important;
+    visibility: hidden!important;
+  }
+}
+
+.#{$base-prefix}u-hide\@laptop {
+  @include breakpoint(laptop, laptop) {
+    display: none!important;
+    visibility: hidden!important;
+  }
+}
+
+.#{$base-prefix}u-hide\@tablet-fluid {
+  @include breakpoint(tablet-fluid, tablet-fluid) {
+    display: none!important;
+    visibility: hidden!important;
+  }
+}
+.#{$base-prefix}u-hide\@tablet {
+  @include breakpoint(tablet, tablet) {
+    display: none!important;
+    visibility: hidden!important;
+  }
+}
+.#{$base-prefix}u-hide\@mobile {
+  @include breakpoint(mobile, mobile) {
+    display: none!important;
+    visibility: hidden!important;
+  }
+}

@@ -1,0 +1,31 @@
+// @CORE -> FUNCTIONS -> CONVERT PX TO EM/REM
+
+
+// em
+// @credit
+// Scally Framework
+@function to-em($value, $context: $font-size) {
+  // If value is a named breakpoint
+  @if type-of($value) == "string" {
+    @if map-has-key($base-breakpoints-min, $value) {
+      $value: map-get($base-breakpoints-min, $value);
+    }
+    @else {
+      @warn "Breakpoint name '#{$value}' not recognised.";
+    }
+  }
+  @return strip-unit($value) / strip-unit($context) * 1em;
+}
+
+
+// rem
+// @credit
+// Scally Framework
+@function to-rem($value) {
+  @return strip-unit($value) / strip-unit($base-font-size) * 1rem;
+}
+
+// to-percent (for example fractions)
+@function to-percent($numerator, $denominator) {
+    @return (100/$denominator) * $numerator * 1%;
+}

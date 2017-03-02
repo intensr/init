@@ -1,0 +1,74 @@
+// @BASE -> SETTINGS -> MEDIA QUERIES
+
+
+// Container sizes within the specific breakpoints / range
+$base-container-sizes: (
+
+  "mobile":          100%,
+  "tablet":          100%,
+  "tablet-fluid":    720,
+  "laptop":          960,
+  "desktop":         1240
+
+) !default;
+
+
+// Min Breakpoints
+$base-breakpoints-min: (
+
+  "mobile":          0,
+  "tablet":          481,
+  "tablet-fluid":    737,
+  "laptop":          977,
+  "desktop":         1441
+
+) !default;
+
+
+// Generate Max Breakpoints automaticly
+$base-breakpoints-max: ();
+$base-breakpoints-min-keys: map-keys($base-breakpoints-min);
+$base-breakpoints-min-values: map-values($base-breakpoints-min);
+$i: 1;
+
+@each $current-breakpoint-key, $current-breakpoint-value in $base-breakpoints-min {
+
+  $next-breakpoint-key: null;
+  $next-breakpoint-value: null;
+
+  @if ($i != length($base-breakpoints-min)) {
+    $next-breakpoint-key: nth($base-breakpoints-min-keys, $i + 1);
+    $next-breakpoint-value: nth($base-breakpoints-min-values, $i + 1);
+  } @else {
+    $next-breakpoint-value: 1;
+  }
+
+  $next-breakpoint-value-reduced: $next-breakpoint-value - 1;
+
+  $base-breakpoints-max: map-merge($base-breakpoints-max, ($current-breakpoint-key: $next-breakpoint-value-reduced));
+
+  $i: $i + 1;
+}
+
+
+
+
+
+// A global setting to define the common breakpoint(s) for Scally and your
+// project. This is mainly used by the `generate-at-breakpoints()` mixin.
+$default-breakpoints: (lap) !default;
+
+
+
+
+// Resolution
+// @credit
+// - Scally framework
+// - http://bjango.com/articles/min-device-pixel-ratio/
+// - https://gist.github.com/marcedwards/3446599
+//
+// + Uses `dpr` as unit
+// + The setting will also accept a `dpi` unit e.g. `144dpi`.
+
+// Retina
+$base-retina-resolution: 1.3 !default;

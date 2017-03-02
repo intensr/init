@@ -1,0 +1,41 @@
+// @BASE -> PLACEHOLDERS -> VERTICAL RHYTHM MARGIN
+
+
+// Applies bottom margin in order to keep a cohesive vertical rhythm and should
+// be used with the (@BASE -> PLACEHOLDERS -> VERTICAL RHYTHM PADDING) for best
+// results.
+
+
+// Elements
+%h1,
+%h2,
+%h3,
+%h4,
+%h5,
+%h6,
+%p,
+%ul,
+%ol,
+%dl,
+%li,
+%hr {
+  @include to-rem(margin-bottom, $base-spacing);
+
+  // Remove from the last children of containing elements.
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Re-reset for double stranded text objects
+// As double stranding mostly happens out of the normal document flow (e.g. sidebars)
+// the margin should be applied again with a finer tuning.
+%o-h1,
+%o-h2,
+%o-h3,
+%o-h4,
+%o-h5,
+%o-h6,
+%o-p {
+  margin-bottom: 0;
+}

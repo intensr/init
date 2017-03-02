@@ -1,0 +1,20 @@
+// @CORE -> UTILITIES -> GROUP
+
+//
+//
+//
+
+
+// Grouping (old `.clearfix`)
+// "`group` class name is nicer and more semantic" (via Dan Cederholm)
+//
+// @credit
+// https://css-tricks.com/snippets/css/clear-fix/
+%#{$base-prefix}u-group,
+.#{$base-prefix}u-group {
+  &:after {
+    content: "" !important;
+    display: table !important;
+    clear: both !important;
+  }
+}

@@ -1,0 +1,24 @@
+// @BASE -> PLACEHOLDERS -> BUTTON
+
+
+//
+// Normalizes every instance of button which can be used.
+//
+
+
+%button {
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  outline: 0;
+  text-align: center;
+  user-select: none;
+  width: auto;
+  border-radius: 0;
+  font-family: $element-button-font-family;
+  @include font-size($element-button-font-size, $element-button-line-height);
+  color: $element-button-color;
+  border: (strip-unit($element-button-border-width) * 1px) solid $element-button-border-color;
+  background: transparent;
+  vertical-align: middle;
+}

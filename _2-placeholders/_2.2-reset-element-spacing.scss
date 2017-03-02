@@ -1,0 +1,40 @@
+// @CORE -> PLACEHOLDER -> ELEMENT SPACING RESET
+
+
+// Additional reset to force more cohesive behaviour
+//
+// @credit
+// inuit and scally frameworks
+// https://github.com/inuitcss/generic.reset/blob/master/_generic.reset.scss
+// https://github.com/chris-pearce/scally/blob/master/core/_reset.scss
+//
+// As well as using normalize.css, it is often advantageous to remove all
+// margins from certain elements. Un-DRY behaviour is on purpose to avoid the
+// ugly behaviour of global resets in the inspect element feature of the browser.
+
+
+// Margings and Paddings
+%body,
+%h1,
+%h2,
+%h3,
+%h4,
+%h5,
+%h6,
+%p,
+%hr,
+%pre,
+%blockquote,
+%ol,
+%ul,
+%dl,
+%dd,
+%figure,
+%table,
+%caption,
+%td,
+%th,
+%form,
+%fieldset,
+%legend,
+%button { margin: 0; padding: 0; }

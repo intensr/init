@@ -1,0 +1,17 @@
+// @BASE -> PLACEHOLDERS -> ELEMENT GAP REMOVE
+
+
+// Remove the gap between media elements and the bottom of their containers.
+//
+// @credit
+// http://html5boilerplate.com/
+
+
+%audio,
+%canvas,
+%iframe,
+%img,
+%svg,
+%video {
+  vertical-align: middle;
+}

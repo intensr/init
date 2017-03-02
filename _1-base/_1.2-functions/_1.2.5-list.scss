@@ -1,0 +1,18 @@
+// @CORE -> FUNCTIONS -> LIST FUNCTIONS
+
+
+// First item of a list
+//
+// @credit
+// http://hugogiraudel.com/2013/08/08/advanced-sass-list-functions/#selecting-values-from-list
+@function list-first($list) {
+  @return nth($list, 1);
+}
+
+// Last item of a list
+//
+// @credit
+// http://hugogiraudel.com/2013/08/08/advanced-sass-list-functions/#selecting-values-from-list
+@function list-last($list) {
+  @return nth($list, length($list));
+}

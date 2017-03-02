@@ -1,0 +1,29 @@
+// @BASE -> MIXINS -> RETINA BACKGROUND IMAGE
+
+
+// Creates a hi-dpi (retina) background image by passing in the image url, the
+// image width and height—or the `auto` keyword`, and the resolution you want
+// to target. By default the resolution comes from: Core -> Settings -> Retina
+// Resolution but if you want to override this then you can pass in either a
+// unitless device pixel ratio (dpr) or a `dpi` value.
+//
+// @credit
+// scally framework
+// http://37signals.com/svn/posts/3271-easy-retina-ready-images-using-scss
+
+
+// Retina backgrounds
+@mixin retina-background(
+  $image,
+  $width: auto,
+  $height: auto,
+  $resolution: $retina-resolution) {
+  $width: if($width, $width, auto);
+  $height: if($height, $height, auto);
+  $resolution: if(unitless($resolution), $resolution * 96dpi, $resolution);
+
+  @media (min-resolution: $resolution) {
+    background-image: url($image);
+    background-size: $width $height;
+  }
+}

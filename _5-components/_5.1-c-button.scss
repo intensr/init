@@ -1,0 +1,43 @@
+// @COMPONENTS -> BUTTON
+
+//
+//
+//
+
+
+// Settings
+$component-button-prefix: $base-prefix !default;
+
+
+// Component
+.#{$component-button-prefix}c-button {
+  @extend .o-button !optional;
+  background: blue;
+  
+  // Hover
+  &:hover {
+
+  }
+
+  // Focus
+  &:focus {
+
+  }
+
+  // Active
+  &:active,
+  &.is-active {
+
+  }
+
+  // Small button
+  &--small {
+    @include font-size($base-spacing-half);
+    padding:
+      to-rem($base-spacing-eight - $element-button-border-width)
+      to-rem($base-spacing-half)
+      to-rem(ceil($base-spacing-half / 4) - $element-button-border-width)
+      to-rem($base-spacing-half);
+    background: red;
+  }
+}

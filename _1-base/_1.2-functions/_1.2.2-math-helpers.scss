@@ -1,0 +1,44 @@
+// @CORE -> FUNCTIONS -> MATH HELPERS
+
+
+// A few maths helpers mainly used for halving and doubling numbers, returning
+// floored integers.
+
+
+// Quarter(s)
+@function quarter($number) {
+  @return floor($number / 4);
+}
+
+@function quarters($number) {
+  @return floor(($number / 4) * 3);
+}
+
+// Third(s)
+@function third($number) {
+  @return floor($number / 3);
+}
+
+@function thirds($number) {
+  @return floor(($number / 3) * 2);
+}
+
+// Halve
+@function halve($number) {
+  @return floor($number / 2);
+}
+
+// Double
+@function double($number) {
+  @return floor($number * 2);
+}
+
+// Triple
+@function triple($number) {
+  @return floor($number * 3);
+}
+
+// Quadruple
+@function quadruple($number) {
+  @return floor($number * 4);
+}
